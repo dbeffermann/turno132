@@ -1,0 +1,2101 @@
+{
+  "game_domain": "emergencias_costumbristas_chilenas",
+  "game_title": "Turno 132: Noche de Lluvia",
+  "version": "0.3.0-demo",
+  "schema": {
+    "version": "2.0",
+    "compatRuntimeVersion": "2.0",
+    "cores": [
+      "conversation_core",
+      "signal_inference_core",
+      "domain_adapter",
+      "runtime_ui"
+    ]
+  },
+  "characters": {
+    "operador_dani": {
+      "name": "Dani",
+      "role": "protagonist",
+      "voice": "calmo, atento, practico",
+      "description": "Operador del turno 132 durante una noche de lluvia."
+    },
+    "central_radio": {
+      "name": "Central",
+      "role": "dispatcher",
+      "voice": "seca, operacional",
+      "description": "Canal interno que confirma despachos y reportes."
+    },
+    "caller_mauricio": {
+      "name": "Mauricio",
+      "role": "caller",
+      "voice": "tenso, intenta sonar tranquilo",
+      "description": "Conductor atrapado en un paso bajo nivel."
+    },
+    "caller_marta": {
+      "name": "Marta",
+      "role": "caller",
+      "voice": "vecina preocupada, concreta",
+      "description": "Vecina que reporta olor a quemado en un edificio."
+    },
+    "caller_elena": {
+      "name": "Elena",
+      "role": "caller",
+      "voice": "preocupada, culpa contenida",
+      "description": "Hija de un adulto mayor que no responde."
+    },
+    "caller_rodrigo": {
+      "name": "Rodrigo",
+      "role": "caller",
+      "voice": "chofer cansado, responsable",
+      "description": "Chofer de micro detenido en ruta con pasajeros inquietos."
+    },
+    "caller_paula": {
+      "name": "Paula",
+      "role": "caller",
+      "voice": "ansiosa pero colaboradora",
+      "description": "Madre que pierde de vista a su hijo en una feria bajo la lluvia."
+    },
+    "caller_ines": {
+      "name": "Inés",
+      "role": "caller",
+      "voice": "curiosa, supersticiosa, observadora",
+      "description": "Vecina que reporta luces raras cerca del zanjón."
+    },
+    "mama": {
+      "name": "Mamá",
+      "role": "personal_contact",
+      "voice": "cariñosa, preocupada",
+      "description": "Mensajea durante el turno y aporta detalles de barrio."
+    },
+    "vale_friend": {
+      "name": "Vale",
+      "role": "personal_contact",
+      "voice": "cercana, alerta, con humor nervioso",
+      "description": "Amiga del operador que se mueve por zonas afectadas por la lluvia."
+    },
+    "nico_friend": {
+      "name": "Nico",
+      "role": "personal_contact",
+      "voice": "práctico, bromista, buen dato",
+      "description": "Amigo con experiencia voluntaria que entrega consejos útiles."
+    },
+    "grupo_barrio": {
+      "name": "Los del Barrio",
+      "role": "personal_group",
+      "voice": "caótico, costumbrista, informativo sin querer",
+      "description": "Grupo de amigos y vecinos que mezcla memes con pistas."
+    },
+    "radar_comunal": {
+      "name": "Radar Comunal",
+      "role": "newsletter",
+      "voice": "boletín ciudadano claro y útil",
+      "description": "Newsletter local con alertas, protocolos y rumores verificados a medias."
+    }
+  },
+  "channels": [
+    [
+      "linea_132",
+      {
+        "type": "emergency_call",
+        "actor": "central_radio",
+        "label": "Línea 132",
+        "color": "#e0b15e",
+        "description": "Canal principal de emergencias."
+      }
+    ],
+    [
+      "radio_central",
+      {
+        "type": "radio",
+        "actor": "central_radio",
+        "label": "Radio Central",
+        "color": "#82a7c9",
+        "description": "Canal operativo interno."
+      }
+    ],
+    [
+      "mama",
+      {
+        "type": "personal_chat",
+        "actor": "mama",
+        "label": "Mamá",
+        "color": "#d8c170",
+        "description": "WhatsApp personal."
+      }
+    ],
+    [
+      "vale",
+      {
+        "type": "personal_chat",
+        "actor": "vale_friend",
+        "label": "Vale",
+        "color": "#c790d8",
+        "description": "WhatsApp personal."
+      }
+    ],
+    [
+      "nico",
+      {
+        "type": "personal_chat",
+        "actor": "nico_friend",
+        "label": "Nico",
+        "color": "#87b5d7",
+        "description": "WhatsApp personal."
+      }
+    ],
+    [
+      "grupo_barrio",
+      {
+        "type": "group_chat",
+        "actor": "grupo_barrio",
+        "label": "Los del Barrio",
+        "color": "#9eb4d4",
+        "description": "Grupo personal."
+      }
+    ],
+    [
+      "radar_comunal",
+      {
+        "type": "newsletter",
+        "actor": "radar_comunal",
+        "label": "Radar Comunal",
+        "color": "#b9a38f",
+        "description": "Newsletter local."
+      }
+    ]
+  ],
+  "cases": [
+    {
+      "id": "pb_nuble_01",
+      "title": "Agua bajo el Paso Ñuble",
+      "status": "pending",
+      "category": "anegamiento",
+      "scheduleTime": "22:08",
+      "allocationBucket": "centro",
+      "minimumClues": 1,
+      "severity": "alta",
+      "stress": 6,
+      "openingLine": "Un conductor llama desde un paso bajo nivel donde el agua sube más rápido de lo normal.",
+      "narrativeIntro": [
+        "La lluvia golpea el techo de la central cuando entra una llamada cortada por estática."
+      ],
+      "optimal": [
+        "rescue_unit",
+        "patrol"
+      ],
+      "conversations": [
+        {
+          "channel": "linea_132",
+          "actor": "caller_mauricio",
+          "time": "22:08",
+          "type": "text",
+          "content": "Aló, creo que me quedé pegado bajo el Paso Ñuble. El auto no avanza y el agua está entrando por abajo.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "operador_dani",
+          "time": "22:08",
+          "type": "text",
+          "content": "Mauricio, quédate conmigo. Necesito ubicación exacta, cuántas personas hay y si el agua está subiendo.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "caller_mauricio",
+          "time": "22:09",
+          "type": "text",
+          "content": "Estoy solo. Veo el letrero de Ñuble y una farmacia en la esquina. Hay otro auto atrás, no sé si también está atrapado.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "radio_central",
+          "actor": "central_radio",
+          "time": "22:09",
+          "type": "text",
+          "content": "Central: se reportan sumideros tapados en el sector. Prioridad si hay agua subiendo.",
+          "src": "",
+          "alt": ""
+        }
+      ],
+      "signalResponse": {
+        "ask_location": "Estoy bajo el letrero de Paso Ñuble, sentido al poniente. Veo una farmacia verde y un paradero con techo rojo.",
+        "ask_people_trapped": "Yo estoy solo, pero el auto de atrás dejó de tocar la bocina. No veo si hay alguien adentro.",
+        "ask_water_level": "El agua me cubre los zapatos dentro del auto y en la calle subió hasta media rueda en menos de dos minutos.",
+        "ask_vehicle_status": "El motor se apagó. La puerta del conductor abre, pero si salgo tengo que meterme al agua.",
+        "calm_and_focus": "Ya, ya. Respiro. Voy a soltar el cinturón y buscar el teléfono con linterna."
+      },
+      "requiredSignals": [
+        "ask_location",
+        "ask_people_trapped",
+        "ask_water_level"
+      ],
+      "characterIds": [
+        "caller_mauricio",
+        "central_radio",
+        "vale_friend",
+        "grupo_barrio",
+        "radar_comunal",
+        "operador_dani"
+      ],
+      "caseCharacters": [
+        {
+          "character_id": "caller_mauricio",
+          "involvement_role": "caller",
+          "is_primary": true
+        },
+        {
+          "character_id": "central_radio",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "vale_friend",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "grupo_barrio",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "radar_comunal",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "operador_dani",
+          "involvement_role": "support",
+          "is_primary": false
+        }
+      ],
+      "dialogues": []
+    },
+    {
+      "id": "edificio_8b_humo_02",
+      "title": "Humo en el 8B",
+      "status": "pending",
+      "category": "humo_edificio",
+      "scheduleTime": "22:21",
+      "allocationBucket": "centro",
+      "minimumClues": 1,
+      "severity": "alta",
+      "stress": 5,
+      "openingLine": "Una vecina reporta olor a cable quemado en un edificio sin estar segura de si es emergencia.",
+      "narrativeIntro": [
+        "La llamada entra baja",
+        "casi con vergüenza",
+        "como si pedir ayuda fuera molestar."
+      ],
+      "optimal": [
+        "fire_unit",
+        "ambulance"
+      ],
+      "conversations": [
+        {
+          "channel": "linea_132",
+          "actor": "caller_marta",
+          "time": "22:21",
+          "type": "text",
+          "content": "Disculpe, no sé si esto es para emergencia. En mi pasillo hay olor a quemado y el automático saltó dos veces.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "operador_dani",
+          "time": "22:22",
+          "type": "text",
+          "content": "Marta, hizo bien en llamar. Necesito saber si ve humo, si hay gente dentro y si pueden salir.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "caller_marta",
+          "time": "22:22",
+          "type": "text",
+          "content": "Veo humo delgado saliendo por debajo del 8B. Ahí vive don Raúl, pero no contesta.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "grupo_barrio",
+          "actor": "grupo_barrio",
+          "time": "22:23",
+          "type": "text",
+          "content": "Tomi: En mi edificio olía a cable quemado y todos dijeron 'debe ser vapor'. Spoiler: no era vapor.",
+          "src": "",
+          "alt": ""
+        }
+      ],
+      "signalResponse": {
+        "ask_fire_status": "No veo llamas, pero el humo es gris y el olor es como plástico caliente. La luz del pasillo parpadea.",
+        "ask_people_present": "En el 8B vive don Raúl. Es mayor, usa bastón y a esta hora casi nunca sale.",
+        "ask_escape_route": "La escalera está libre. El ascensor está detenido y la puerta del 8B está tibia, no caliente.",
+        "ask_location": "Edificio Los Aromos, piso 8, departamento B. Entrada por calle Lira, frente a una panadería cerrada.",
+        "calm_and_focus": "Ya le avisé a la conserje. Me quedo en la escalera, no me acerco más a la puerta."
+      },
+      "requiredSignals": [
+        "ask_fire_status",
+        "ask_people_present",
+        "ask_escape_route"
+      ],
+      "characterIds": [
+        "caller_marta",
+        "central_radio",
+        "mama",
+        "grupo_barrio",
+        "radar_comunal",
+        "operador_dani"
+      ],
+      "caseCharacters": [
+        {
+          "character_id": "caller_marta",
+          "involvement_role": "caller",
+          "is_primary": true
+        },
+        {
+          "character_id": "central_radio",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "mama",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "grupo_barrio",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "radar_comunal",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "operador_dani",
+          "involvement_role": "support",
+          "is_primary": false
+        }
+      ],
+      "dialogues": []
+    },
+    {
+      "id": "adulto_mayor_luz_03",
+      "title": "Don Raúl no responde",
+      "status": "pending",
+      "category": "adulto_mayor",
+      "scheduleTime": "22:37",
+      "allocationBucket": "centro",
+      "minimumClues": 1,
+      "severity": "alta",
+      "stress": 6,
+      "openingLine": "La hija de un adulto mayor llama porque no logra comunicarse con él durante el corte de luz.",
+      "narrativeIntro": [
+        "El caso parece repetir una dirección ya mencionada. La lluvia convierte cada demora en duda."
+      ],
+      "optimal": [
+        "ambulance",
+        "rescue_unit"
+      ],
+      "conversations": [
+        {
+          "channel": "linea_132",
+          "actor": "caller_elena",
+          "time": "22:37",
+          "type": "text",
+          "content": "Soy Elena. Mi papá vive en el 8B de Los Aromos. No me contesta y con este corte me asusté.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "operador_dani",
+          "time": "22:38",
+          "type": "text",
+          "content": "Elena, vamos por partes. Cuándo habló con él por última vez, quién puede abrir y si tiene condiciones médicas.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "caller_elena",
+          "time": "22:38",
+          "type": "text",
+          "content": "Hablé a las nueve. Me dijo que le olía raro el enchufe de la cocina, pero que no quería molestar.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "radar_comunal",
+          "actor": "radar_comunal",
+          "time": "22:44",
+          "type": "text",
+          "content": "Consejo operativo: si un adulto mayor no responde y hay corte eléctrico, verificar acceso, medicación y última comunicación.",
+          "src": "",
+          "alt": ""
+        }
+      ],
+      "signalResponse": {
+        "ask_last_contact": "Me contestó a las 21:03. Estaba lúcido, pero dijo que se iba a sentar porque le dolía un poco la cabeza.",
+        "ask_access": "La conserje tiene copia, pero está esperando autorización. Yo voy en camino, me faltan veinte minutos.",
+        "ask_medical_signs": "Tiene presión alta y a veces se marea si se levanta rápido. No usa oxígeno ni nada así.",
+        "ask_fire_status": "Me dijo 'olor a enchufe caliente', no habló de llamas. Después se cortó la luz del edificio.",
+        "calm_and_focus": "Gracias. Me ayuda que me pida datos concretos; estaba empezando a imaginar lo peor."
+      },
+      "requiredSignals": [
+        "ask_last_contact",
+        "ask_access",
+        "ask_medical_signs"
+      ],
+      "characterIds": [
+        "caller_elena",
+        "central_radio",
+        "caller_marta",
+        "mama",
+        "radar_comunal",
+        "operador_dani"
+      ],
+      "caseCharacters": [
+        {
+          "character_id": "caller_elena",
+          "involvement_role": "caller",
+          "is_primary": true
+        },
+        {
+          "character_id": "central_radio",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "caller_marta",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "mama",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "radar_comunal",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "operador_dani",
+          "involvement_role": "support",
+          "is_primary": false
+        }
+      ],
+      "dialogues": []
+    },
+    {
+      "id": "micro_ruta_sur_04",
+      "title": "Micro detenida en Ruta Sur",
+      "status": "pending",
+      "category": "transporte_lluvia",
+      "scheduleTime": "22:55",
+      "allocationBucket": "sur",
+      "minimumClues": 1,
+      "severity": "media",
+      "stress": 5,
+      "openingLine": "Un chofer reporta una micro detenida tras una frenada brusca en plena lluvia.",
+      "narrativeIntro": [
+        "La radio cruje con reportes de neblina. En el celular",
+        "Vale acaba de mencionar la misma ruta."
+      ],
+      "optimal": [
+        "ambulance",
+        "patrol"
+      ],
+      "conversations": [
+        {
+          "channel": "linea_132",
+          "actor": "caller_rodrigo",
+          "time": "22:55",
+          "type": "text",
+          "content": "Soy Rodrigo, chofer. Tuve que frenar fuerte cerca de la salida 33. No choqué, pero tengo pasajeros asustados.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "operador_dani",
+          "time": "22:56",
+          "type": "text",
+          "content": "Rodrigo, necesito ubicación exacta, si hay heridos y si están seguros fuera de la vía.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "caller_rodrigo",
+          "time": "22:56",
+          "type": "text",
+          "content": "Estoy en berma, sentido sur. Una pasajera dice que le falta el aire, pero creo que es susto.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "vale",
+          "actor": "vale_friend",
+          "time": "23:00",
+          "type": "text",
+          "content": "Vale: Vi una micro detenida con intermitentes. Pasé lento. Hay neblina baja justo antes del retorno.",
+          "src": "",
+          "alt": ""
+        }
+      ],
+      "signalResponse": {
+        "ask_location": "Ruta Sur, salida 33, antes del retorno a caletera. Estoy en la berma derecha, sentido sur.",
+        "ask_injuries": "Una pasajera está respirando rápido y dice que le aprieta el pecho. Nadie más reporta golpes.",
+        "ask_visibility": "La neblina baja tapa las luces hasta que están encima. Ya puse triángulos, pero se ven tarde.",
+        "ask_people_trapped": "Van catorce pasajeros. Nadie está atrapado; algunos quieren bajarse a la lluvia.",
+        "calm_and_focus": "Entendido. Les diré que se queden sentados y lejos de la puerta hasta que llegue apoyo."
+      },
+      "requiredSignals": [
+        "ask_location",
+        "ask_injuries",
+        "ask_visibility"
+      ],
+      "characterIds": [
+        "caller_rodrigo",
+        "central_radio",
+        "vale_friend",
+        "nico_friend",
+        "radar_comunal",
+        "operador_dani"
+      ],
+      "caseCharacters": [
+        {
+          "character_id": "caller_rodrigo",
+          "involvement_role": "caller",
+          "is_primary": true
+        },
+        {
+          "character_id": "central_radio",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "vale_friend",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "nico_friend",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "radar_comunal",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "operador_dani",
+          "involvement_role": "support",
+          "is_primary": false
+        }
+      ],
+      "dialogues": []
+    },
+    {
+      "id": "luces_zanjon_05",
+      "title": "Luces en el zanjón",
+      "status": "pending",
+      "category": "riesgo_electrico_misterio",
+      "scheduleTime": "23:12",
+      "allocationBucket": "sur",
+      "minimumClues": 1,
+      "severity": "media",
+      "stress": 4,
+      "openingLine": "Una vecina reporta luces moviéndose sobre el agua del zanjón durante la lluvia.",
+      "narrativeIntro": [
+        "El caso suena a rumor de barrio",
+        "hasta que coincide con tres mensajes personales."
+      ],
+      "optimal": [
+        "fire_unit",
+        "patrol"
+      ],
+      "conversations": [
+        {
+          "channel": "linea_132",
+          "actor": "caller_ines",
+          "time": "23:12",
+          "type": "text",
+          "content": "Mire, no quiero sonar loca, pero hay luces verdes en el zanjón. Se mueven contra la corriente.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "operador_dani",
+          "time": "23:13",
+          "type": "text",
+          "content": "Inés, puede ser riesgo eléctrico o químico. No se acerque. Necesito distancia, testigos y peligro visible.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "caller_ines",
+          "time": "23:13",
+          "type": "text",
+          "content": "Estoy en la reja del pasaje, como a treinta metros. Hay niños mirando desde la esquina.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "radar_comunal",
+          "actor": "radar_comunal",
+          "time": "23:14",
+          "type": "text",
+          "content": "Vecinos reportan luces intermitentes en canal San Eugenio. Autoridades recomiendan no acercarse a agua con posible carga eléctrica.",
+          "src": "",
+          "alt": ""
+        }
+      ],
+      "signalResponse": {
+        "ask_hazard": "No veo poste caído, pero hay un zumbido suave cuando la luz aparece. El agua toca una reja metálica vieja.",
+        "ask_distance": "Estoy a unos treinta metros, detrás de la reja. Le grité a los niños que se alejaran.",
+        "ask_witnesses": "Lo vio el caballero del almacén y dos niños. El grupo del barrio también empezó a hablar de lo mismo.",
+        "ask_location": "Zanjón San Eugenio, pasaje Las Dalias, detrás de la multicancha. Hay una reja oxidada y un mural azul.",
+        "calm_and_focus": "Ya, no me acerco. Voy a mantener a la gente atrás de la vereda."
+      },
+      "requiredSignals": [
+        "ask_hazard",
+        "ask_distance",
+        "ask_witnesses"
+      ],
+      "characterIds": [
+        "caller_ines",
+        "central_radio",
+        "vale_friend",
+        "grupo_barrio",
+        "radar_comunal",
+        "nico_friend",
+        "operador_dani"
+      ],
+      "caseCharacters": [
+        {
+          "character_id": "caller_ines",
+          "involvement_role": "caller",
+          "is_primary": true
+        },
+        {
+          "character_id": "central_radio",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "vale_friend",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "grupo_barrio",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "radar_comunal",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "nico_friend",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "operador_dani",
+          "involvement_role": "support",
+          "is_primary": false
+        }
+      ],
+      "dialogues": []
+    },
+    {
+      "id": "feria_nino_06",
+      "title": "Niño perdido en la feria",
+      "status": "pending",
+      "category": "busqueda_local",
+      "scheduleTime": "23:27",
+      "allocationBucket": "centro",
+      "minimumClues": 1,
+      "severity": "media",
+      "stress": 5,
+      "openingLine": "Una madre pierde de vista a su hijo en una feria de barrio que empieza a cerrar por la lluvia.",
+      "narrativeIntro": [
+        "Después de tanto agua",
+        "humo y luces",
+        "una voz quebrada trae algo cotidiano y urgente."
+      ],
+      "optimal": [
+        "patrol"
+      ],
+      "conversations": [
+        {
+          "channel": "linea_132",
+          "actor": "caller_paula",
+          "time": "23:27",
+          "type": "text",
+          "content": "Mi hijo no está. Estábamos comprando sopaipillas en la feria y lo perdí entre la lluvia y la gente.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "operador_dani",
+          "time": "23:28",
+          "type": "text",
+          "content": "Paula, vamos a ubicarlo. Necesito ropa, última vez que lo vio, punto de encuentro y si alguien más lo vio.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "linea_132",
+          "actor": "caller_paula",
+          "time": "23:28",
+          "type": "text",
+          "content": "Tiene ocho años, parka amarilla, gorro azul. Le gustan los puestos con luces, pero se asusta fácil.",
+          "src": "",
+          "alt": ""
+        },
+        {
+          "channel": "grupo_barrio",
+          "actor": "grupo_barrio",
+          "time": "23:29",
+          "type": "text",
+          "content": "Cata: En la feria de Las Dalias hay un niño con parka amarilla cerca del puesto de mote. Parece esperando a alguien.",
+          "src": "",
+          "alt": ""
+        }
+      ],
+      "signalResponse": {
+        "verify_child_details": "Parka amarilla, gorro azul, mochila de dinosaurio. Se llama Martín y sabe decir mi número, pero se bloquea si hay mucha gente.",
+        "ask_location": "Feria de Las Dalias, entrada por la multicancha, al lado del zanjón. Estoy frente al carrito de sopaipillas.",
+        "ask_witnesses": "Una vendedora dijo que lo vio caminando hacia el puesto de mote, donde hay luces de colores.",
+        "ask_people_trapped": "No está atrapado, pero la feria se está cerrando y cada minuto hay menos gente para preguntar.",
+        "calm_and_focus": "Ya. Me quedo en el punto de sopaipillas y no corro por todos lados."
+      },
+      "requiredSignals": [
+        "verify_child_details",
+        "ask_location",
+        "ask_witnesses"
+      ],
+      "characterIds": [
+        "caller_paula",
+        "central_radio",
+        "grupo_barrio",
+        "caller_ines",
+        "operador_dani"
+      ],
+      "caseCharacters": [
+        {
+          "character_id": "caller_paula",
+          "involvement_role": "caller",
+          "is_primary": true
+        },
+        {
+          "character_id": "central_radio",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "grupo_barrio",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "caller_ines",
+          "involvement_role": "support",
+          "is_primary": false
+        },
+        {
+          "character_id": "operador_dani",
+          "involvement_role": "support",
+          "is_primary": false
+        }
+      ],
+      "dialogues": []
+    }
+  ],
+  "settings": {
+    "semantic": {
+      "keywordAliases": {
+        "ask_location": [
+          "dónde estás",
+          "donde estas",
+          "ubicación",
+          "ubicacion",
+          "dirección",
+          "direccion",
+          "calle",
+          "referencia",
+          "hito visible",
+          "qué ves cerca",
+          "que ves cerca",
+          "sentido de la ruta",
+          "kilómetro",
+          "kilometro",
+          "altura"
+        ],
+        "ask_people_trapped": [
+          "hay alguien atrapado",
+          "cuántas personas",
+          "cuantas personas",
+          "estás solo",
+          "estas solo",
+          "hay alguien contigo",
+          "hay niños",
+          "hay pasajeros",
+          "hay adulto mayor"
+        ],
+        "ask_water_level": [
+          "el agua sube",
+          "nivel del agua",
+          "agua entrando",
+          "te llega el agua",
+          "se está llenando",
+          "se esta llenando",
+          "corriente",
+          "anegado",
+          "desagüe",
+          "desague"
+        ],
+        "ask_vehicle_status": [
+          "el auto prende",
+          "puedes salir del auto",
+          "ventanas",
+          "puerta abre",
+          "motor",
+          "está bloqueado",
+          "esta bloqueado",
+          "combustible",
+          "están en la vía",
+          "estan en la via"
+        ],
+        "ask_fire_status": [
+          "hay fuego",
+          "ves llamas",
+          "ves humo",
+          "olor a quemado",
+          "olor a plástico",
+          "olor a plastico",
+          "chispa",
+          "chispas",
+          "cable quemado",
+          "alarma de humo"
+        ],
+        "ask_people_present": [
+          "hay gente dentro",
+          "quién vive ahí",
+          "quien vive ahi",
+          "hay alguien en el departamento",
+          "hay vecinos",
+          "hay personas",
+          "adulto mayor",
+          "niños dentro"
+        ],
+        "ask_escape_route": [
+          "puedes salir",
+          "hay salida",
+          "la puerta abre",
+          "la escalera",
+          "ascensor",
+          "ruta de escape",
+          "pasillo",
+          "está bloqueado",
+          "esta bloqueado"
+        ],
+        "ask_last_contact": [
+          "cuándo habló",
+          "cuando hablo",
+          "última vez",
+          "ultima vez",
+          "hace cuánto",
+          "hace cuanto",
+          "último mensaje",
+          "ultimo mensaje",
+          "lo viste hoy"
+        ],
+        "ask_access": [
+          "tienes llave",
+          "puedes entrar",
+          "puerta cerrada",
+          "conserje",
+          "acceso",
+          "ventana",
+          "quién puede abrir",
+          "quien puede abrir"
+        ],
+        "ask_medical_signs": [
+          "respira",
+          "está consciente",
+          "esta consciente",
+          "responde",
+          "medicamentos",
+          "dolor",
+          "se cayó",
+          "se cayo",
+          "enfermedad",
+          "diabetes",
+          "presión",
+          "presion"
+        ],
+        "ask_injuries": [
+          "hay heridos",
+          "alguien herido",
+          "dolor",
+          "golpe",
+          "sangra",
+          "mareo",
+          "se desmayó",
+          "se desmayo",
+          "no puede respirar",
+          "crisis",
+          "asma"
+        ],
+        "ask_visibility": [
+          "hay visibilidad",
+          "ves la pista",
+          "neblina",
+          "luces",
+          "señalización",
+          "senalizacion",
+          "ves autos",
+          "frenazos",
+          "lluvia fuerte"
+        ],
+        "ask_hazard": [
+          "hay peligro",
+          "cables",
+          "electricidad",
+          "poste",
+          "agua con corriente",
+          "olor químico",
+          "olor quimico",
+          "explosión",
+          "explosion",
+          "zanjón",
+          "zanjon"
+        ],
+        "ask_distance": [
+          "a qué distancia",
+          "a que distancia",
+          "qué tan cerca",
+          "que tan cerca",
+          "te acercaste",
+          "mantente lejos",
+          "desde dónde miras",
+          "desde donde miras"
+        ],
+        "ask_witnesses": [
+          "alguien más lo vio",
+          "alguien mas lo vio",
+          "hay testigos",
+          "quién está contigo",
+          "quien esta contigo",
+          "vecinos vieron",
+          "hay cámaras",
+          "hay camaras"
+        ],
+        "calm_and_focus": [
+          "respira",
+          "vamos paso a paso",
+          "mantén la calma",
+          "manten la calma",
+          "mírame",
+          "mira un punto",
+          "necesito que me escuches",
+          "habla lento"
+        ],
+        "verify_child_details": [
+          "ropa",
+          "cómo está vestido",
+          "como esta vestido",
+          "nombre del niño",
+          "edad",
+          "última vez que lo viste",
+          "ultima vez que lo viste",
+          "punto de encuentro",
+          "teléfono del niño",
+          "telefono del niño"
+        ]
+      },
+      "noMatchResponses": [
+        "No te sigo; Dame una pista concreta; Reformula en una frase"
+      ]
+    },
+    "interaction": {
+      "message_delay_ms": 500,
+      "response_timeout_ms": 30000,
+      "strictAuthoring": true,
+      "turn_start_time": "22:00",
+      "turn_end_time": "01:30",
+      "clock_tick_interval_ms": 7000,
+      "clock_advance_slow_minutes": 4,
+      "clock_advance_normal_minutes": 6,
+      "clock_advance_rush_minutes": 9,
+      "mystery_reward_score_threshold": 280,
+      "mystery_reward_score_bonus": 120
+    },
+    "narrative": {
+      "mysteryRewardTitle": "Caso misterioso resuelto",
+      "mysteryRewardBody": "Al cierre del turno, tu consistencia permitió unir pistas dispersas y cerrar un homicidio que llevaba semanas sin autor identificado.",
+      "mysteryRewardUnlockLabel": "Bono por cierre extraordinario",
+      "mysteryRewardScoreThreshold": 280,
+      "mysteryRewardScoreBonus": 120
+    },
+    "ui": {
+      "playerLabel": "Operador 132",
+      "archiveLabel": "Manual / Archivo"
+    },
+    "schema": {
+      "version": "2.0",
+      "compatRuntimeVersion": "2.0",
+      "cores": [
+        "conversation_core",
+        "signal_inference_core",
+        "domain_adapter",
+        "runtime_ui"
+      ]
+    }
+  },
+  "assets": {
+    "music": {},
+    "sfx": {
+      "notification": {
+        "path": "iteracion/moon2/assets/audio/sfx/inicio docu.mp3",
+        "license": "proprietary"
+      }
+    }
+  },
+  "resources": {
+    "ambulance": {
+      "label": "Ambulancia",
+      "description": "Atiende personas heridas, descompensadas, con dificultad respiratoria o posible golpe serio.",
+      "category": "salud",
+      "total": 2,
+      "cost": 1,
+      "allocationMode": "bucketed",
+      "capacities": {
+        "centro": 1,
+        "sur": 1
+      }
+    },
+    "fire_unit": {
+      "label": "Bomberos",
+      "description": "Controla fuego, humo, chispas eléctricas, rescate en edificios y riesgos con cables o agua electrificada.",
+      "category": "bomberos",
+      "total": 2,
+      "cost": 1,
+      "allocationMode": "bucketed",
+      "capacities": {
+        "centro": 1,
+        "sur": 1
+      }
+    },
+    "patrol": {
+      "label": "Patrulla",
+      "description": "Ordena tránsito, asegura perímetros, apoya búsquedas y verifica situaciones ambiguas en terreno.",
+      "category": "seguridad",
+      "total": 2,
+      "cost": 1,
+      "allocationMode": "bucketed",
+      "capacities": {
+        "centro": 1,
+        "sur": 1
+      }
+    },
+    "rescue_unit": {
+      "label": "Rescate",
+      "description": "Interviene cuando hay personas atrapadas, accesos bloqueados, vehículos inmovilizados o puertas que abrir.",
+      "category": "rescate",
+      "total": 1,
+      "cost": 1,
+      "allocationMode": "bucketed",
+      "capacities": {
+        "centro": 1
+      }
+    }
+  },
+  "resourceOutcomes": {
+    "ambulance_pb_nuble_01_1": {
+      "case_id": "pb_nuble_01",
+      "resource": "ambulance",
+      "branch": "partial",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -18,
+      "calm_delta": 2,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "Mauricio insiste en que primero necesitan sacarlos del agua.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Ambulancia queda esperando acceso seguro; falta rescate o control de tránsito.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "ambulance_edificio_8b_humo_02_2": {
+      "case_id": "edificio_8b_humo_02",
+      "resource": "ambulance",
+      "branch": "success",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": 35,
+      "calm_delta": -3,
+      "next_event": "",
+      "keep_case_open": true,
+      "reaction": "Marta recuerda que don Raúl vive solo y se tranquiliza al saber que habrá evaluación médica.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Ambulancia queda prealertada para adulto mayor expuesto a humo.",
+          "hint": "",
+          "outcome": ""
+        },
+        {
+          "channel": "grupo_barrio",
+          "actor": "grupo_barrio",
+          "delay": 0,
+          "type": "text",
+          "content": "Tomi: Bajaron a la vecina del 8. Se ve humo poquito pero constante.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "ambulance_adulto_mayor_luz_03_3": {
+      "case_id": "adulto_mayor_luz_03",
+      "resource": "ambulance",
+      "branch": "success",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": 45,
+      "calm_delta": -4,
+      "next_event": "",
+      "keep_case_open": true,
+      "reaction": "Elena baja la voz: por fin siente que alguien tomó en serio los minutos perdidos.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Ambulancia se dirige a evaluar a don Raúl por posible mareo o exposición a humo.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "ambulance_micro_ruta_sur_04_4": {
+      "case_id": "micro_ruta_sur_04",
+      "resource": "ambulance",
+      "branch": "success",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": 40,
+      "calm_delta": -4,
+      "next_event": "",
+      "keep_case_open": true,
+      "reaction": "Rodrigo pide a la pasajera que se siente cerca de la ventana y le habla lento.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Ambulancia se dirige a Ruta Sur por dificultad respiratoria en pasajera.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "ambulance_luces_zanjon_05_5": {
+      "case_id": "luces_zanjon_05",
+      "resource": "ambulance",
+      "branch": "failure",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -14,
+      "calm_delta": 1,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "Inés dice que nadie está herido por ahora; el peligro es que se acerquen.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Ambulancia no controla el riesgo activo del agua ni el perímetro.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "ambulance_feria_nino_06_6": {
+      "case_id": "feria_nino_06",
+      "resource": "ambulance",
+      "branch": "failure",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -15,
+      "calm_delta": 1,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "Paula dice que el niño no está herido; lo urgente es ubicarlo sin dispersar la búsqueda.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Ambulancia no corresponde mientras no exista daño físico reportado.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "fire_unit_pb_nuble_01_1": {
+      "case_id": "pb_nuble_01",
+      "resource": "fire_unit",
+      "branch": "partial",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -8,
+      "calm_delta": 1,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "Mauricio no reporta fuego ni chispas; el problema principal es atrapamiento y tránsito.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Bomberos puede apoyar, pero esta decisión no resuelve el riesgo inmediato.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "fire_unit_edificio_8b_humo_02_2": {
+      "case_id": "edificio_8b_humo_02",
+      "resource": "fire_unit",
+      "branch": "success",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": 45,
+      "calm_delta": -5,
+      "next_event": "",
+      "keep_case_open": true,
+      "reaction": "Marta baja por la escalera y confirma que la conserje abrió el acceso al edificio.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Bomberos se dirige al 8B por posible falla eléctrica con humo.",
+          "hint": "",
+          "outcome": ""
+        },
+        {
+          "channel": "radar_comunal",
+          "actor": "radar_comunal",
+          "delay": 0,
+          "type": "text",
+          "content": "Microalerta: olor a plástico quemado + humo delgado = escalar, no esperar a ver llamas.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "fire_unit_adulto_mayor_luz_03_3": {
+      "case_id": "adulto_mayor_luz_03",
+      "resource": "fire_unit",
+      "branch": "partial",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -12,
+      "calm_delta": 1,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "Elena entiende el riesgo eléctrico, pero ahora el dato crítico es que su papá no responde.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Bomberos no reemplaza evaluación médica ni acceso seguro.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "fire_unit_micro_ruta_sur_04_4": {
+      "case_id": "micro_ruta_sur_04",
+      "resource": "fire_unit",
+      "branch": "failure",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -15,
+      "calm_delta": 1,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "Rodrigo no reporta humo, fuego ni atrapamiento.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Bomberos no es el primer recurso para esta micro detenida.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "fire_unit_luces_zanjon_05_5": {
+      "case_id": "luces_zanjon_05",
+      "resource": "fire_unit",
+      "branch": "success",
+      "confidence_band": "",
+      "unlocks": [
+        "water_light_pattern"
+      ],
+      "score_delta": 45,
+      "calm_delta": -4,
+      "next_event": "",
+      "keep_case_open": true,
+      "reaction": "Inés retrocede con los niños y deja libre el acceso por la multicancha.",
+      "clueNotes": [
+        "El patrón se repite en zanjones y agua acumulada",
+        "no solo en cables visibles."
+      ],
+      "cluesUnlocked": [
+        "water_light_pattern"
+      ],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Bomberos acude por posible riesgo eléctrico o químico en agua.",
+          "hint": "water_light_pattern",
+          "outcome": ""
+        },
+        {
+          "channel": "vale",
+          "actor": "vale_friend",
+          "delay": 0,
+          "type": "text",
+          "content": "Estoy lejos, pero desde acá también se ve el reflejo verde. No parece poste normal.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "fire_unit_feria_nino_06_6": {
+      "case_id": "feria_nino_06",
+      "resource": "fire_unit",
+      "branch": "failure",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -18,
+      "calm_delta": 2,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "No hay fuego, humo ni atrapamiento en feria.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Bomberos no aporta a la búsqueda local.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "patrol_pb_nuble_01_1": {
+      "case_id": "pb_nuble_01",
+      "resource": "patrol",
+      "branch": "success",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": 35,
+      "calm_delta": -3,
+      "next_event": "",
+      "keep_case_open": true,
+      "reaction": "Mauricio ve las balizas a lo lejos y deja de intentar mover el auto.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Patrulla corta acceso al paso bajo nivel y ordena el tránsito.",
+          "hint": "",
+          "outcome": ""
+        },
+        {
+          "channel": "radar_comunal",
+          "actor": "radar_comunal",
+          "delay": 0,
+          "type": "text",
+          "content": "Actualización: Paso Ñuble cerrado preventivamente. Evitar sector.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "patrol_edificio_8b_humo_02_2": {
+      "case_id": "edificio_8b_humo_02",
+      "resource": "patrol",
+      "branch": "failure",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -20,
+      "calm_delta": 2,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "Marta dice que no hay pelea ni desorden; lo que huele es eléctrico.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Patrulla no aborda la causa del humo. Falta bomberos.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "patrol_adulto_mayor_luz_03_3": {
+      "case_id": "adulto_mayor_luz_03",
+      "resource": "patrol",
+      "branch": "failure",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -16,
+      "calm_delta": 2,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "Elena no reporta conflicto ni amenaza externa.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Patrulla puede apoyar, pero no resuelve el acceso ni la evaluación médica.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "patrol_micro_ruta_sur_04_4": {
+      "case_id": "micro_ruta_sur_04",
+      "resource": "patrol",
+      "branch": "success",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": 35,
+      "calm_delta": -3,
+      "next_event": "",
+      "keep_case_open": true,
+      "reaction": "Rodrigo deja de discutir con los pasajeros que querían bajar a la berma.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Patrulla irá a señalizar la micro y controlar la berma con baja visibilidad.",
+          "hint": "",
+          "outcome": ""
+        },
+        {
+          "channel": "vale",
+          "actor": "vale_friend",
+          "delay": 0,
+          "type": "text",
+          "content": "Acabo de pasar por salida 33. Buena decisión cortar un poco el flujo: no se ve nada hasta estar encima.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "patrol_luces_zanjon_05_5": {
+      "case_id": "luces_zanjon_05",
+      "resource": "patrol",
+      "branch": "success",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": 35,
+      "calm_delta": -3,
+      "next_event": "",
+      "keep_case_open": true,
+      "reaction": "Inés empieza a ordenar a los curiosos con una autoridad inesperada.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Patrulla asegurará perímetro para mantener a vecinos lejos del zanjón.",
+          "hint": "",
+          "outcome": ""
+        },
+        {
+          "channel": "grupo_barrio",
+          "actor": "grupo_barrio",
+          "delay": 0,
+          "type": "text",
+          "content": "Cata: Los niños ya se fueron de la esquina. Quedó gente mirando desde lejos.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "patrol_feria_nino_06_6": {
+      "case_id": "feria_nino_06",
+      "resource": "patrol",
+      "branch": "success",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": 45,
+      "calm_delta": -5,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "Paula deja de caminar en círculos y se queda en el punto acordado.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Patrulla inicia búsqueda local por feria y coordina punto de reunión.",
+          "hint": "",
+          "outcome": ""
+        },
+        {
+          "channel": "grupo_barrio",
+          "actor": "grupo_barrio",
+          "delay": 0,
+          "type": "text",
+          "content": "Cata: Lo tengo a la vista cerca del mote. Está bien, solo asustado.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "rescue_unit_pb_nuble_01_1": {
+      "case_id": "pb_nuble_01",
+      "resource": "rescue_unit",
+      "branch": "success",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": 45,
+      "calm_delta": -4,
+      "next_event": "",
+      "keep_case_open": true,
+      "reaction": "Mauricio suelta el cinturón y mantiene la llamada abierta.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Rescate sale hacia Paso Ñuble con equipo para extracción en agua.",
+          "hint": "",
+          "outcome": ""
+        },
+        {
+          "channel": "grupo_barrio",
+          "actor": "grupo_barrio",
+          "delay": 0,
+          "type": "text",
+          "content": "Cata: Confirmo, hay otro auto atrás del Paso Ñuble. Se ve una linterna adentro.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "rescue_unit_edificio_8b_humo_02_2": {
+      "case_id": "edificio_8b_humo_02",
+      "resource": "rescue_unit",
+      "branch": "partial",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -10,
+      "calm_delta": 1,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "La puerta aún no está bloqueada; sin control del humo, abrir puede empeorar el riesgo.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Rescate espera indicación técnica de bomberos.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "rescue_unit_adulto_mayor_luz_03_3": {
+      "case_id": "adulto_mayor_luz_03",
+      "resource": "rescue_unit",
+      "branch": "success",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": 35,
+      "calm_delta": -3,
+      "next_event": "",
+      "keep_case_open": true,
+      "reaction": "La conserje recibe instrucción de esperar al equipo y no forzar sola la puerta.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Rescate coordina apertura segura con conserjería.",
+          "hint": "",
+          "outcome": ""
+        },
+        {
+          "channel": "radar_comunal",
+          "actor": "radar_comunal",
+          "delay": 0,
+          "type": "text",
+          "content": "Protocolo recordatorio: adulto mayor + no respuesta + corte = confirmar acceso y evaluación presencial.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "rescue_unit_micro_ruta_sur_04_4": {
+      "case_id": "micro_ruta_sur_04",
+      "resource": "rescue_unit",
+      "branch": "failure",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -12,
+      "calm_delta": 1,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "Los pasajeros pueden moverse; el riesgo está en salud y tránsito.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Rescate queda sobrecalificado y reduce disponibilidad para atrapamientos reales.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "rescue_unit_luces_zanjon_05_5": {
+      "case_id": "luces_zanjon_05",
+      "resource": "rescue_unit",
+      "branch": "partial",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -10,
+      "calm_delta": 1,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "No hay persona atrapada. Meter rescate al borde del agua sin perímetro aumenta el riesgo.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Rescate espera evaluación de bomberos.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    },
+    "rescue_unit_feria_nino_06_6": {
+      "case_id": "feria_nino_06",
+      "resource": "rescue_unit",
+      "branch": "failure",
+      "confidence_band": "",
+      "unlocks": [],
+      "score_delta": -12,
+      "calm_delta": 1,
+      "next_event": "",
+      "keep_case_open": false,
+      "reaction": "El niño está perdido, no atrapado.",
+      "clueNotes": [],
+      "cluesUnlocked": [],
+      "messages": [
+        {
+          "channel": "",
+          "actor": "system",
+          "delay": 0,
+          "type": "text",
+          "content": "Rescate queda innecesariamente comprometido.",
+          "hint": "",
+          "outcome": ""
+        }
+      ]
+    }
+  },
+  "cinematicEvents": [
+    {
+      "id": "cinematic_diego_revealed",
+      "case": "reveal_truth_01",
+      "title": "Diego's Truth",
+      "body": "After your questions, Diego finally admits the truth about skipping class.",
+      "media": ""
+    }
+  ],
+  "endings": {
+    "ending_truth_revealed": {
+      "title": "You Discovered the Truth",
+      "body": "Diego's secret is out. He did skip class to go to the movies with Ana. The game is over."
+    },
+    "ending_lie_believed": {
+      "title": "The Lie Stands",
+      "body": "You didn't ask the right questions. Diego's story remains unchanged."
+    }
+  },
+  "protagonist": {
+    "id": "operador_dani",
+    "name": "Dani",
+    "phoneChats": [
+      {
+        "id": "mama",
+        "contact": "Mamá",
+        "avatar": "M",
+        "color": "#d8c170",
+        "status": "despierta aunque dice que no",
+        "unread": 2,
+        "autoReply": "Come algo aunque sea chico. Te cambia la cabeza.",
+        "mediaPermissions": [],
+        "messages": [
+          {
+            "from": "them",
+            "time": "21:47",
+            "text": "¿Ya estás en la central? La lluvia está pesadísima por acá.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "me",
+            "time": "21:49",
+            "text": "Sí, entré al turno. Está movido pero manejable.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "21:52",
+            "text": "Te dejé sopa en el refri. Operador con hambre decide peor, acuérdate.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "22:18",
+            "text": "La vecina del 8B tiene al papá mayor. Con estos cortes me acordé de él.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "me",
+            "time": "22:19",
+            "text": "Lo tengo presente. Gracias por el dato.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          }
+        ]
+      },
+      {
+        "id": "vale",
+        "contact": "Vale",
+        "avatar": "V",
+        "color": "#c790d8",
+        "status": "manejando con lluvia",
+        "unread": 3,
+        "autoReply": "Voy manejando, te escribo cuando pueda parar.",
+        "mediaPermissions": [],
+        "messages": [
+          {
+            "from": "them",
+            "time": "21:55",
+            "text": "Voy donde mi abuela en San Miguel. Me carga manejar con lluvia, pero me pidió que le llevara remedios.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "me",
+            "time": "21:57",
+            "text": "Maneja lento. Si hay taco, me avisas sector y referencia.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "22:07",
+            "text": "Paso Ñuble está raro. Vi agua juntándose muy rápido, como si el desagüe se hubiese tapado.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "22:50",
+            "text": "Ahora voy por Ruta Sur. Hay neblina baja y harto frenazo de golpe.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "23:09",
+            "text": "No sé si es reflejo, pero hacia el zanjón vi unas luces verdes moviéndose con la lluvia. Raro, ¿no?",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "me",
+            "time": "23:10",
+            "text": "Si puedes, no te acerques. Dame referencia visual y sigue en zona iluminada.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          }
+        ]
+      },
+      {
+        "id": "nico",
+        "contact": "Nico",
+        "avatar": "N",
+        "color": "#87b5d7",
+        "status": "en línea intermitente",
+        "unread": 1,
+        "autoReply": "Estoy saliendo de la pega, te leo después.",
+        "mediaPermissions": [],
+        "messages": [
+          {
+            "from": "them",
+            "time": "21:58",
+            "text": "Dato de ex-voluntario: en lluvia pregunta siempre si el agua sube o se mantiene. Cambia todo.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "22:12",
+            "text": "Y en carretera no aceptes 'estoy en la ruta' como ubicación. Ruta + sentido + hito, siempre.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "me",
+            "time": "22:13",
+            "text": "Anotado. Te debo una.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "23:20",
+            "text": "Ojo con luces en zanjones. Puede ser cable haciendo arco o químico arrastrado por agua.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          }
+        ]
+      },
+      {
+        "id": "grupo_barrio",
+        "contact": "Los del Barrio",
+        "avatar": "LB",
+        "color": "#9eb4d4",
+        "status": "grupo silenciado",
+        "unread": 6,
+        "autoReply": "No responder durante el turno.",
+        "mediaPermissions": [],
+        "messages": [
+          {
+            "from": "them",
+            "time": "22:03",
+            "text": "Tomi: Está la ciudad modo sopaipilla mojada.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "22:06",
+            "text": "Cata: En Paso Ñuble ya se está juntando agua. Siempre pasa y nadie arregla nada.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "22:23",
+            "text": "Tomi: En mi edificio olía a cable quemado y todos dijeron 'debe ser vapor'. Spoiler: no era vapor.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "23:11",
+            "text": "Cata: ¿Alguien más vio luces cerca del zanjón? Mi perro se quedó mirando fijo.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          }
+        ]
+      },
+      {
+        "id": "radar_comunal",
+        "contact": "Radar Comunal",
+        "avatar": "RC",
+        "color": "#b9a38f",
+        "status": "newsletter local",
+        "unread": 1,
+        "autoReply": "Suscripción activa",
+        "mediaPermissions": [],
+        "messages": [
+          {
+            "from": "them",
+            "time": "21:40",
+            "text": "Alerta lluvia: pasos bajo nivel con riesgo de anegamiento rápido. Reportar agua subiendo, vehículos atrapados y referencia visible.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "22:16",
+            "text": "Cortes breves de luz en San Miguel, Ñuñoa y sectores cercanos a zanjones urbanos.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "22:44",
+            "text": "Consejo operativo: si un adulto mayor no responde y hay corte eléctrico, verificar acceso, medicación y última comunicación.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "23:04",
+            "text": "Tránsito: neblina irregular en Ruta Sur, salida 33 y retorno hacia caletera con frenadas bruscas.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          },
+          {
+            "from": "them",
+            "time": "23:14",
+            "text": "Vecinos reportan luces intermitentes en canal San Eugenio. Autoridades recomiendan no acercarse a agua con posible carga eléctrica.",
+            "type": "text",
+            "src": "",
+            "tone": ""
+          }
+        ]
+      }
+    ]
+  }
+}
